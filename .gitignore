@@ -10,3 +10,12 @@ __pycache__/
 # Editor / OS
 .vscode/
 .DS_Store
+
+# Environment files
+server/.env
+client/.env
+
+# Google OAuth
+server/credentials.json
+server/token.json
+
