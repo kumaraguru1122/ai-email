@@ -18,4 +18,3 @@ client/.env
 # Google OAuth
 server/credentials.json
 server/token.json
-
