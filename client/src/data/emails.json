@@ -1,0 +1,103 @@
+[
+  {
+    "id": "mail_001",
+    "from": "coe@university.edu",
+    "subject": "End Semester Examination Schedule Released",
+    "date": "2025-11-20T09:00:00Z",
+    "category": "examination",
+    "priority": "high",
+    "summary": "The end semester examination timetable for all departments is now available.",
+    "body": "The end semester examination schedule has been published on the university portal.\n\nStudents are advised to carefully review the dates, timings, and venue details for each course. Any clashes or discrepancies must be reported to the Controller of Examinations within two working days.\n\nFailure to adhere to the schedule will not be considered as grounds for re-examination."
+  },
+  {
+    "id": "mail_002",
+    "from": "placements@university.edu",
+    "subject": "Campus Drive – Infosys Registration Open",
+    "date": "2025-11-21T10:30:00Z",
+    "category": "placement",
+    "priority": "high",
+    "summary": "Eligible final-year students can now register for the Infosys campus recruitment drive.",
+    "body": "The Placement Cell invites applications for the Infosys campus recruitment drive scheduled next month.\n\nInterested students must complete their registration through the placement portal and upload the required documents before the deadline.\n\nLate or incomplete applications will not be considered."
+  },
+  {
+    "id": "mail_003",
+    "from": "scholarships@university.edu",
+    "subject": "Merit Scholarship Application Deadline",
+    "date": "2025-11-22T08:15:00Z",
+    "category": "scholarship",
+    "priority": "high",
+    "summary": "The deadline to apply for the merit-based scholarship is approaching.",
+    "body": "Students who are eligible for the merit-based scholarship are reminded to submit their applications online.\n\nEnsure that all academic records and supporting documents are uploaded correctly. Applications submitted after the deadline will be automatically rejected.\n\nFor queries, contact the Scholarship Office during working hours."
+  },
+  {
+    "id": "mail_004",
+    "from": "academics@university.edu",
+    "subject": "Course Registration Approval Required",
+    "date": "2025-11-22T12:45:00Z",
+    "category": "admin",
+    "priority": "medium",
+    "summary": "Faculty advisor approval is required to complete next semester course registration.",
+    "body": "Course registration for the upcoming semester is currently pending advisor approval.\n\nStudents must meet their assigned faculty advisor and obtain approval through the academic portal.\n\nRegistration will be considered incomplete until approval is granted."
+  },
+  {
+    "id": "mail_005",
+    "from": "coe@university.edu",
+    "subject": "Hall Ticket Download Instructions",
+    "date": "2025-11-23T07:50:00Z",
+    "category": "examination",
+    "priority": "high",
+    "summary": "Students must download and print hall tickets before examinations begin.",
+    "body": "Hall tickets for the end semester examinations are now available for download.\n\nStudents should log in to the examination portal and print their hall ticket well in advance.\n\nNo student will be permitted to enter the examination hall without a valid hall ticket."
+  },
+  {
+    "id": "mail_006",
+    "from": "placements@university.edu",
+    "subject": "Pre-Placement Talk – Amazon",
+    "date": "2025-11-24T14:00:00Z",
+    "category": "placement",
+    "priority": "medium",
+    "summary": "Amazon will conduct a pre-placement talk detailing roles and hiring process.",
+    "body": "Amazon will be conducting a pre-placement talk for eligible students.\n\nThe session will cover job roles, compensation details, and the overall recruitment process.\n\nAttendance is strongly recommended for students planning to apply."
+  },
+  {
+    "id": "mail_007",
+    "from": "scholarships@university.edu",
+    "subject": "Government Scholarship Document Verification",
+    "date": "2025-11-25T09:20:00Z",
+    "category": "scholarship",
+    "priority": "high",
+    "summary": "Shortlisted students must complete in-person document verification this week.",
+    "body": "Students shortlisted for the government scholarship must appear in person for document verification.\n\nOriginal documents along with photocopies are required. The verification schedule is available on the portal.\n\nFailure to attend will result in cancellation of the scholarship application."
+  },
+  {
+    "id": "mail_008",
+    "from": "admin@university.edu",
+    "subject": "Notice: University Holiday",
+    "date": "2025-11-26T06:30:00Z",
+    "category": "admin",
+    "priority": "low",
+    "summary": "The university will remain closed tomorrow due to administrative reasons.",
+    "body": "This is to inform all students and staff that the university will remain closed tomorrow.\n\nAll academic and administrative activities will resume as per the regular schedule on the following working day.\n\nPlease plan accordingly."
+  },
+  {
+    "id": "mail_009",
+    "from": "csdept@university.edu",
+    "subject": "Guest Lecture on Artificial Intelligence",
+    "date": "2025-11-26T11:10:00Z",
+    "category": "other",
+    "priority": "low",
+    "summary": "A guest lecture on recent advances in artificial intelligence will be held.",
+    "body": "The Department of Computer Science is organizing a guest lecture on recent advances in artificial intelligence.\n\nThe lecture will be delivered by an industry expert and is open to all interested students.\n\nDetails regarding venue and timing are available on the department notice board."
+  },
+  {
+    "id": "mail_010",
+    "from": "placements@university.edu",
+    "subject": "Internship Opportunity – Summer 2026",
+    "date": "2025-11-27T15:40:00Z",
+    "category": "placement",
+    "priority": "medium",
+    "summary": "Applications are open for paid summer internships with partner companies.",
+    "body": "The Placement Cell is accepting applications for summer internships for 2026.\n\nThese internships are offered by partner companies and provide practical industry exposure.\n\nInterested students should apply through the placement portal before the deadline."
+  }
+]
+

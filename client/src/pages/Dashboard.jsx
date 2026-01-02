@@ -1,41 +1,35 @@
-import { useEffect, useState } from "react";
-import { fetchEmails } from "../api";
+import TopBar from "../components/TopBar";
+import SideBar from "../components/SideBar";
 import EmailList from "../components/EmailList";
-import { useNavigate } from "react-router-dom";
+import EmailContent from "../components/EmailContent";
 
-export default function Dashboard() {
-  const [emails, setEmails] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
+import emailData from "../data/emails.json";
 
-  useEffect(() => {
-    fetchEmails()
-      .then(setEmails)
-      .catch(() => {
-        setError("Not authenticated");
-        navigate("/login");
-      })
-      .finally(() => setLoading(false));
-  }, []);
+const Dashboard = () => {
 
-  if (loading) {
-    return <div className="p-6">Loading emails…</div>;
-  }
-
-  if (error) {
-    return null;
-  }
+  // temporary data for design purpose
+  const emails = emailData;
+  const showList = true;
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow p-4">
-        <h1 className="text-xl font-semibold">Inbox</h1>
-      </header>
+    <div className="h-screen flex flex-col bg-neutral-50">
+      <TopBar />
 
-      <main className="p-4">
-        <EmailList emails={emails} />
+      <main className="flex flex-1 overflow-hidden">
+        <div className="hidden md:block">
+          <SideBar />
+        </div>
+
+        <section className="flex-1 overflow-y-auto bg-white">
+          {showList ? (
+            <EmailList emails={emails} />
+          ) : (
+            <EmailContent email={emails[0]} />
+          )}
+        </section>
       </main>
     </div>
   );
-}
+};
+
+export default Dashboard;
