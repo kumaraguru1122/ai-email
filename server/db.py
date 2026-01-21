@@ -1,8 +1,20 @@
 import os
 from datetime import datetime
 from dotenv import load_dotenv
-from sqlalchemy import create_engine, Column, Integer, String, Boolean, DateTime, ForeignKey, UniqueConstraint
-from sqlalchemy.orm import sessionmaker, declarative_base, relationship
+
+from sqlalchemy import (
+    create_engine,
+    Column,
+    Integer,
+    String,
+    Boolean,
+    DateTime,
+    ForeignKey,
+    UniqueConstraint,
+    Text,
+    JSON,
+)
+from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 
 load_dotenv()
 
@@ -41,20 +53,23 @@ class User(Base):
         cascade="all, delete-orphan",
     )
 
-    def __repr__(self):
-        return f"<User(id={self.id}, email={self.email})>"
-
 
 # ---------- Gmail account ----------
 class GmailAccount(Base):
     __tablename__ = "gmail_accounts"
 
     id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    user_id = Column(
+        Integer,
+        ForeignKey("users.id", ondelete="CASCADE"),
+        nullable=False,
+        index=True,
+    )
     google_email = Column(String, nullable=False)
     connected_at = Column(DateTime, default=datetime.utcnow)
 
     user = relationship("User", back_populates="gmail_accounts")
+
     gmail_token = relationship(
         "GmailToken",
         back_populates="gmail_account",
@@ -62,12 +77,15 @@ class GmailAccount(Base):
         cascade="all, delete-orphan",
     )
 
+    messages = relationship(
+        "GmailMessage",
+        back_populates="gmail_account",
+        cascade="all, delete-orphan",
+    )
+
     __table_args__ = (
         UniqueConstraint("user_id", "google_email", name="uq_user_gmail"),
     )
-
-    def __repr__(self):
-        return f"<GmailAccount(id={self.id}, email={self.google_email})>"
 
 
 # ---------- Gmail OAuth tokens ----------
@@ -79,12 +97,46 @@ class GmailToken(Base):
         ForeignKey("gmail_accounts.id", ondelete="CASCADE"),
         primary_key=True,
     )
-    access_token = Column(String, nullable=False)
-    refresh_token = Column(String, nullable=False)
+    access_token = Column(Text, nullable=False)
+    refresh_token = Column(Text, nullable=False)
     expires_at = Column(DateTime, nullable=False)
 
-    gmail_account = relationship("GmailAccount", back_populates="gmail_token")
+    gmail_account = relationship(
+        "GmailAccount",
+        back_populates="gmail_token",
+    )
 
-    def __repr__(self):
-        return f"<GmailToken(gmail_account_id={self.gmail_account_id})>"
+
+# ---------- Gmail messages ----------
+class GmailMessage(Base):
+    __tablename__ = "gmail_messages"
+
+    id = Column(Integer, primary_key=True)
+    gmail_account_id = Column(
+        Integer,
+        ForeignKey("gmail_accounts.id", ondelete="CASCADE"),
+        nullable=False,
+        index=True,
+    )
+
+    gmail_message_id = Column(String, nullable=False)
+    thread_id = Column(String, nullable=False)
+    internal_date = Column(DateTime, index=True)
+    snippet = Column(Text)
+    payload = Column(JSON, nullable=False)
+
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    gmail_account = relationship(
+        "GmailAccount",
+        back_populates="messages",
+    )
+
+    __table_args__ = (
+        UniqueConstraint(
+            "gmail_account_id",
+            "gmail_message_id",
+            name="uq_gmail_message",
+        ),
+    )
 

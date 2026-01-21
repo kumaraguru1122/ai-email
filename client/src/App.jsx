@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import {GmailProvider} from "./contexts/GmailContext";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -58,7 +59,9 @@ const App = () => {
   return (
     <BrowserRouter>
       <AuthProvider>
+       <GmailProvider>
         <AppRoutes />
+       </GmailProvider> 
       </AuthProvider>
     </BrowserRouter>
   );

@@ -2,12 +2,17 @@ const API_URL = "http://localhost:8000";
 
 // ------------------ Auth ------------------
 
-export async function register(name, email, password) {
+export async function register(name, email, password, confirmPassword) {
   const res = await fetch(`${API_URL}/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     credentials: "include",
-    body: JSON.stringify({ name, email, password }),
+    body: JSON.stringify({
+      name,
+      email,
+      password,
+      confirm_password: confirmPassword,
+    }),
   });
 
   if (!res.ok) throw new Error("Signup failed");
@@ -42,7 +47,23 @@ export async function getMe() {
   return res.json();
 }
 
-// ------------------ Gmail ------------------
+export async function updateUser(payload) {
+  const res = await fetch(`${API_URL}/me`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || "Failed to update user");
+  }
+
+  return res.json();
+}
+
+// ------------------ Gmail OAuth ------------------
 
 export async function connectGmail() {
   const res = await fetch(`${API_URL}/gmail/connect`, {
@@ -51,7 +72,7 @@ export async function connectGmail() {
   });
 
   if (!res.ok) throw new Error("Failed to initiate Gmail connection");
-  return res.json();
+  return res.json(); // { auth_url }
 }
 
 export async function disconnectGmail() {
@@ -73,20 +94,31 @@ export async function fetchGmailStatus() {
   return res.json();
 }
 
-export async function updateUser(payload) {
-  const res = await fetch(`${API_URL}/update-user`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
+// ------------------ Gmail Messages ------------------
+
+export async function syncGmailMessages() {
+  const res = await fetch(`${API_URL}/gmail/sync`, {
+    method: "POST",
     credentials: "include",
-    body: JSON.stringify(payload),
   });
 
   if (!res.ok) {
-    const errorData = await res.json().catch(() => ({}));
-    throw new Error(errorData.detail || "Failed to update user");
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || "Failed to sync Gmail messages");
   }
 
-  return res.json();
+  return res.json(); 
 }
 
+export async function fetchGmailMessages({ limit = 50, offset = 0 } = {}) {
+  const params = new URLSearchParams({ limit, offset });
+
+  const res = await fetch(
+    `${API_URL}/gmail/messages?${params.toString()}`,
+    { credentials: "include" }
+  );
+
+  if (!res.ok) throw new Error("Failed to fetch Gmail messages");
+  return res.json();
+}
 
